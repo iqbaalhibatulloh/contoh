@@ -13,6 +13,7 @@ use Illuminate\Http\RedirectResponse;
 
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
+use App\DataTables\UsersDataTable;
 
 
 class UserController extends Controller
@@ -20,10 +21,9 @@ class UserController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(UsersDataTable $dataTable)
     {
-        $users = User::all();
-        return view("user.daftarPengguna", compact('users'));
+        return $dataTable->render('user.daftarPengguna');
     }
 
     /**
@@ -33,7 +33,7 @@ class UserController extends Controller
     {
         return view("user.registrasi");
     }
-
+//  6706220110 - Iqbaal Hibatulloh - D3IF 46-04
     /**
      * Store a newly created resource in storage.
      */

@@ -28,30 +28,30 @@ class RegisteredUserController extends Controller
      *
      * @throws \Illuminate\Validation\ValidationException
      */
+
+    // AHMAD FAZA AL FARISI (6706220050)
     public function store(Request $request): RedirectResponse
     {
         $request->validate([
             'username' => ['required', 'string', 'max:100'],
             'fullname' => ['required', 'string', 'max:100'],
-            'email' => ['required', 'string', 'email', 'max:255'],
-            'role' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
-            'address' => ['required', 'string', 'max:100'],
+            'address' => ['required', 'string', 'max:1000'],
             'birthdate' => ['required', 'date'],
-            'phonenumber' => ['required', 'string', 'max:20'],
+            'phoneNumber' => ['required', 'string', 'max:20'],
             'agama' => ['required', 'string', 'max:20'],
-            'jenisKelamin' => ['required', 'numeric', 'in:0.1'],
+            'jenisKelamin' => ['required', 'numeric', 'in:0,1'],
         ]);
-// Iqbaal Hibatulloh - 6706220110
+
         $user = User::create([
             'username' => $request->username,
             'fullname' => $request->fullname,
             'email' => $request->email,
-            'role' => $request->role,
-            'password' => ($$request->password),
+            'password' => Hash::make($request->password),
             'address' => $request->address,
             'birthdate' => $request->birthdate,
-            'phonenumber' => $request->phonenumber,
+            'phoneNumber' => $request->phoneNumber,
             'agama' => $request->agama,
             'jenisKelamin' => $request->jenisKelamin,
         ]);

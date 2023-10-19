@@ -11,18 +11,16 @@
                 </div>
 
                 <!-- Navigation Links -->
+                {{-- AHMAD FAZA AL FARISI 6706220050 D3IF 46-04 --}}
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        {{ __('Home') }}
+                        {{ __('Dashboard') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('Payment')" :active="request()->routeIs('Payment')">
-                        {{ __('Payment') }}
+                    <x-nav-link :href="route('user.daftarPengguna')" :active="request()->routeIs('user.daftarPengguna')">
+                        {{ __('Daftar Pengguna') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('MemberList')" :active="request()->routeIs('MemberList')">
-                        {{ __('Member list') }}
-                    </x-nav-link>
-                    <x-nav-link :href="route('Dokumen')" :active="request()->routeIs('Dokumen')">
-                        {{ __('Dokumen') }}
+                    <x-nav-link :href="route('koleksi.daftarKoleksi')" :active="request()->routeIs('koleksi.daftarKoleksi')">
+                        {{ __('Koleksi Pengguna') }}
                     </x-nav-link>
                 </div>
             </div>

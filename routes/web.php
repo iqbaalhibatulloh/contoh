@@ -1,5 +1,7 @@
 <?php
 
+// 6706220110 - Iqbaal Hibatulloh - D3IF 46-04
+
 use App\Http\Controllers\CollectionController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
@@ -15,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-// Iqbaal Hibatulloh 6706220110
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -30,7 +32,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::get('/user', [UserController::class, 'index'])->name('user.daftarPengguna');
-    Route::get('/userRegistrration', [UserController::class, 'create'])->name('user.registrasi');
+    Route::get('/userRegistration', [UserController::class, 'create'])->name('user.registrasi');
     Route::post('/userStore', [UserController::class, 'store'])->name('user.storePengguna');
     Route::get('/userView/{user}', [UserController::class, 'show'])->name('user.infoPengguna');
 
@@ -40,4 +42,4 @@ Route::middleware('auth')->group(function () {
     Route::get('/koleksiView/{collection}', [CollectionController::class, 'show'])->name('koleksi.infoKoleksi');
 });
 
-require _DIR_.'/auth.php';
+require __DIR__.'/auth.php';

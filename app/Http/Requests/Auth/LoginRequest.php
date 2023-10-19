@@ -1,6 +1,6 @@
-    <?php
+<?php
 
-// namespace App\Http\Requests\Auth;
+namespace App\Http\Requests\Auth;
 
 use Illuminate\Auth\Events\Lockout;
 use Illuminate\Foundation\Http\FormRequest;
@@ -24,6 +24,8 @@ class LoginRequest extends FormRequest
      *
      * @return array<string, \Illuminate\Contracts\Validation\Rule|array|string>
      */
+
+    // AHMAD FAZA AL FARISI (6706220050)
     public function rules(): array
     {
         return [
@@ -57,6 +59,8 @@ class LoginRequest extends FormRequest
      *
      * @throws \Illuminate\Validation\ValidationException
      */
+
+    // AHMAD FAZA AL FARISI (6706220050)
     public function ensureIsNotRateLimited(): void
     {
         if (! RateLimiter::tooManyAttempts($this->throttleKey(), 5)) {
@@ -83,4 +87,3 @@ class LoginRequest extends FormRequest
         return Str::transliterate(Str::lower($this->input('username')).'|'.$this->ip());
     }
 }
-    

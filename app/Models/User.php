@@ -1,5 +1,7 @@
 <?php
 
+// 6706220050 - AHMAD FAZA AL FARISI - D3IF 46-04
+
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -18,7 +20,6 @@ class User extends Authenticatable
      * @var array<int, string>
      */
 
-    //Iqbaal Hiabtulloh 6706220110
     protected $fillable = [
         'username',
         'fullname',
