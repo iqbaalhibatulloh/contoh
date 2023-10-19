@@ -1,7 +1,6 @@
 <?php
 
-// 6706220050 - AHMAD FAZA AL FARISI - D3IF 46-04
-
+// Iqbaal Hibatulloh 6706220110
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;

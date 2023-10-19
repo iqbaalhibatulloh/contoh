@@ -29,7 +29,7 @@ class RegisteredUserController extends Controller
      * @throws \Illuminate\Validation\ValidationException
      */
 
-    // AHMAD FAZA AL FARISI (6706220050)
+    // Iqbaal Hibatulloh - 6706220110
     public function store(Request $request): RedirectResponse
     {
         $request->validate([

@@ -69,7 +69,7 @@
             <x-input-error :messages="$errors->get('phone')" class="mt-2" />
         </div>
 
-        <!-- AHMAD FAZA AL FARISI (6706220050) 46-04 -->
+{{-- // Iqbaal Hibatulloh 6706220110 --}}
         <!-- Agama -->
         <div class="mt-4">
             <x-input-label for="agama" :value="__('Agama')" />
