@@ -1,6 +1,5 @@
 <?php
 
-// Iqbaal Hibatulloh 6706220110
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -10,9 +9,20 @@ class Collection extends Model
 {
     use HasFactory;
 
+    /**
+     * NIM: 6706220110
+     * NAMA: Iqbaal Hibatulloh
+     * KELAS: 46-04
+     */
+    
     protected $fillable = [
         'namaKoleksi',
         'jenisKoleksi',
-        'jumlahKoleksi',
+        'jumlahKoleksi'
     ];
+
+
+
+
+    
 }

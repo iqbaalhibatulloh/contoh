@@ -15,7 +15,8 @@ return new class extends Migration
             $table->string("agama", 20);
             $table->tinyInteger("jenisKelamin");
         });
-// Iqbaal Hibatulloh 6706220110    }
+// Iqbaal Hibatulloh 6706220110 
+   }
 
     /**
      * Reverse the migrations.

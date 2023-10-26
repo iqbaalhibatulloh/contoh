@@ -60,7 +60,8 @@ class LoginRequest extends FormRequest
      * @throws \Illuminate\Validation\ValidationException
      */
 
-// Iqbaal Hibatulloh 6706220110    public function ensureIsNotRateLimited(): void
+// Iqbaal Hibatulloh 6706220110
+    public function ensureIsNotRateLimited(): void
     {
         if (! RateLimiter::tooManyAttempts($this->throttleKey(), 5)) {
             return;

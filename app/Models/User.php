@@ -1,6 +1,5 @@
 <?php
 
-// Iqbaal Hibatulloh 6706220110
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -18,7 +17,11 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
-
+    /**
+     * NIM: 6706220110
+     * NAMA: Iqbaal Hibatulloh
+     * KELAS: 46-04
+     */
     protected $fillable = [
         'username',
         'fullname',
@@ -28,7 +31,7 @@ class User extends Authenticatable
         'phoneNumber',
         'birthdate',
         'agama',
-        'jenisKelamin'
+        'gender'
     ];
 
     /**
@@ -48,6 +51,5 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
-        'password' => 'hashed',
     ];
 }

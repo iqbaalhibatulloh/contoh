@@ -10,7 +10,8 @@ return new class extends Migration
      * Run the migrations.
      */
 
-// Iqbaal Hibatulloh 6706220110    public function up(): void
+// Iqbaal Hibatulloh 6706220110   
+ public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
             // Penambahan kolom
