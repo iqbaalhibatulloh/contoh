@@ -1,29 +1,36 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
 
 return new class extends Migration
 {
     /**
      * Run the migrations.
+     *
+     * @return void
      */
-    public function up(): void
+    public function up()
     {
         Schema::create('collections', function (Blueprint $table) {
-            $table->id();
-            $table->string('namaKoleksi', 100); // Menghapus '11' dan '100', cukup menentukan tipe data
-            $table->tinyInteger('jenisKoleksi');
-            $table->integer('jumlahKoleksi');
-            $table->timestamps(); // Menggunakan timestamps() untuk created_at dan updated_at
+            $table->integer('id')->autoIncrement();
+            $table->string('nama', 100);
+            $table->tinyInteger('jenis');
+            $table->dateTime('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->integer('jumlahAwal');
+            $table->integer('jumlahSisa');
+            $table->integer('jumlahKeluar');
         });
     }
 
     /**
      * Reverse the migrations.
+     *
+     * @return void
      */
-    public function down(): void
+    public function down()
     {
         Schema::dropIfExists('collections');
     }

@@ -12,11 +12,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string("agama", 20);
-            $table->tinyInteger("jenisKelamin");
+            $table->string('agama', 20);
+            $table->tinyInteger('jenis_kelamin');
         });
-// Iqbaal Hibatulloh 6706220110 
-   }
+    } 
 
     /**
      * Reverse the migrations.

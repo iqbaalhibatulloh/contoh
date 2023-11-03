@@ -1,50 +1,62 @@
-{{-- Iqbaal HIbatulloh (6706220110) --}}
-
-<x-guest-layout>
-    <form method="POST" action="{{ route('koleksi.storeKoleksi') }}">
-        @csrf
-
-        <!-- Username -->
-        <div>
-            <x-input-label for="namaKoleksi" :value="__('Nama Koleksi')" />
-            <x-text-input id="namaKoleksi" class="block mt-1 w-full" type="text" name="namaKoleksi" :value="old('namaKoleksi')" required autofocus autocomplete="namaKoleksi" />
-            <x-input-error :messages="$errors->get('namaKoleksi')" class="mt-2" />
-        </div>
-
-        <!-- Fullname -->
-        <div class="mt-4">
-            <x-input-label for="jenisKoleksi" :value="__('Jenis Koleksi')" />
-            <div>
-                <label for="0" class="text-white">Buku</label>
-            <input id="jenisKoleksi" type="radio" name="jenisKoleksi" required value="1" />
+<x-app-layout>
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            {{ __('Tambah Koleksi') }}
+        </h2>
+    </x-slot>
+  
+    <div class="py-12">
+          <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="p-6 bg-white border-b border-gray-200">
+                  <form method="POST" action="/koleksiStore">
+                      @csrf
+          
+                      <!-- Judul -->
+                      <div>
+                          <x-input-label for="nama" :value="__('Judul')" />
+          
+                          <x-text-input id="nama" class="block mt-1 w-full" type="text" name="nama" :value="old('nama')" required autofocus />
+          
+                          <x-input-error :messages="$errors->get('name')" class="mt-2" />
+                      </div>
+  
+                      <!-- Jenis -->
+                      <div>
+                          <x-input-label for="jenis" :value="__('Jenis')" />
+          
+                          <select id="jenis" name="jenis" class="form-select" required>
+                                <option>Pilih salah satu</option>
+                                <option value="1">Buku</option>
+                                <option value="2">Majalah</option>
+                                <option value="3">Cakram Digital</option>
+                            </select>
+          
+                          <x-input-error :messages="$errors->get('jenis')" class="mt-2" />
+                      </div>
+  
+                      <!-- Jumlah -->
+                      <div>
+                          <x-input-label for="jumlahAwal" :value="__('Jumlah')" />
+          
+                          <x-text-input id="jumlahAwal" class="block mt-1 w-full" type="number" name="jumlahAwal" :value="old('jumlahAwal')" min="1" required />
+          
+                          <x-input-error :messages="$errors->get('jumlahAwal')" class="mt-2" />
+                      </div>
+          
+                      <div class="flex items-center justify-end mt-4">
+                          <x-primary-button type="reset" class="ml-4">
+                              {{ __('Reset') }}
+                          </x-primary-button>
+  
+                          <x-primary-button class="ml-4">
+                              {{ __('Tambah Koleksi') }}
+                          </x-primary-button>
+                      </div>
+                  </form>
+          
+                </div>
             </div>
-            <div>
-                <label for="1" class="text-white">Majalah</label>
-            <input id="jenisKoleksi" type="radio" name="jenisKoleksi" required value="2" />
-            </div>
-            <div>
-                <label for="1" class="text-white">Cakram Digital</label>
-            <input id="jenisKoleksi" type="radio" name="jenisKoleksi" required value="3" />
-            </div>
-            <x-input-error :messages="$errors->get('jenisKoleksi')" class="mt-2" />
-        </div>
-
-        <!-- Email Address -->
-        <div class="mt-4">
-            <x-input-label for="jumlahKoleksi" :value="__('Jumlah Koleksi')" />
-            <x-text-input id="jumlahKoleksi" class="block mt-1 w-full" type="number" name="jumlahKoleksi" :value="old('jumlahKoleksi')" required autocomplete="jumlahKoleksi" />
-            <x-input-error :messages="$errors->get('jumlahKoleksi')" class="mt-2" />
-        </div>
-
-      
-        <div class="flex items-center justify-end mt-4">
-            <a class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800" href="{{ route('login') }}">
-                {{ __('Already registered?') }}
-            </a>
-
-            <x-primary-button class="ml-4">
-                {{ __('Register') }}
-            </x-primary-button>
-        </div>
-    </form>
-</x-guest-layout>
+          </div>
+    </div>
+  </x-app-layout>

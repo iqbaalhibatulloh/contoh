@@ -2,125 +2,92 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Collection;
 use Illuminate\Http\Request;
-use App\DataTables\CollectionsDataTable;
-
-/**
- * NIM: 6706220110
- * NAMA: Iqbaal Hibatulloh
- * KELAS: 46-04
- */
+use App\Models\Collection;
+use Illuminate\Support\Facades\DB;
+use Yajra\DataTables\Facades\DataTables;
 
 class CollectionController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index(CollectionsDataTable $dataTable)
-    {
-        return $dataTable->render('koleksi.daftarKoleksi');
+    public function index() {
+        return view('koleksi.daftarKoleksi');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
+    public function create() {
         return view('koleksi.registrasi');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function show(Collection $collection) {
+        return view('koleksi.infoKoleksi', compact('collection'));
+    }
+
+    public function getAllCollections() {
+            $collections = DB::table('collections')
+            ->select(
+                'id as id',
+                'nama as judul',
+                DB::raw('
+                    (CASE
+                    WHEN jenis="1" THEN "Buku"
+                    WHEN jenis="2" THEN "Majalah"
+                    WHEN jenis="3" THEN "Cakram Digital"
+                    END) AS jenis
+                    '),
+                'jumlahSisa as jumlahSisa',
+                'jumlahAwal as jumlahAwal',
+                'jumlahKeluar as jumlahKeluar')
+            ->orderBy('nama', 'asc')
+            ->get();
+
+            return DataTables::of($collections)
+            ->addColumn('action', function($collection) {
+                $html = '
+                <a class="btn btn-info" href="'.url('koleksiView')."/".$collection->id.'">Edit</a>
+                ';
+                return $html;
+            })
+            ->make(true);
+    }
+
+    public function store(Request $request) 
     {
-        $collections = Collection::create([
-            'namaKoleksi' => $request->namaKoleksi,
-            'jenisKoleksi' => $request->jenisKoleksi,
-            'jumlahKoleksi' => $request->jumlahKoleksi,
+        $request->validate([
+            'nama'      => ['required', 'string', 'max:255', 'unique:collections'],
+            'jenis'     => ['required', 'gt:0'],
+            'jumlahAwal'    => ['required', 'gt:0']
+        ],
+        [
+            'nama.unique'   => 'Nama koleksi tersebut sudah ada'
         ]);
-        return redirect('/koleksi');
+
+        $koleksi = [
+            'nama' => $request->nama,
+            'jenis' => $request->jenis,
+            'jumlahAwal' => $request->jumlahAwal,
+            'jumlahSisa' => $request->jumlahAwal,
+            'jumlahKeluar' => 0,
+        ];
+
+        DB::table('collections')->insert($koleksi);
+        return view('koleksi.daftarKoleksi');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    /**
- * NIM: 6706220110
- * NAMA: Iqbaal Hibatulloh
- * KELAS: 46-04
- */
-    public function show(Collection $collection)
+    public function update(Request $request)
     {
-        $jenisKoleksi = "";
-        switch ($collection->jenisKoleksi) {
-            case 1:
-                $jenisKoleksi = "buku";
-                break;
-            case 2:
-                $jenisKoleksi = "majalah";
-                break;
-            case 3:
-                $jenisKoleksi = "cakram digital";
-                break;
-            
-        }
-        return view('koleksi.infoKoleksi', [
-            "koleksi" => $collection,
-            "jenisKoleksi" => $jenisKoleksi
+        $request->validate([
+            'jenis'     => ['required', 'gt:0'],
+            'jumlahSisa'     => ['required', 'gt:0'],
+            'jumlahKeluar'     => ['required', 'gt:0'],
         ]);
-    }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Collection $collection)
-    {
-        return view("koleksi.editkoleksi", compact("collection"));
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Collection $collection)
-    {
-        $validatedData = $request->validate([
-            'namaKoleksi' => 'required',
-            'jenisKoleksi' => 'required',
-            'jumlahKoleksi' => 'required',
+        $affected = DB::table('collections')
+        ->where('id', $request->id)
+        ->update([
+            'jenis' => $request->jenis,
+            'jumlahSisa' => $request->jumlahSisa,
+            'jumlahKeluar' => $request->jumlahKeluar,
         ]);
-        $collection->update($request->except (['token_']));
 
-        return redirect()->route('koleksi.infoKoleksi', $collection->id);
-    }
-
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        return view('koleksi.daftarKoleksi');
     }
 }
